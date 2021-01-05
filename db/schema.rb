@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_05_125618) do
+ActiveRecord::Schema.define(version: 2021_01_05_135518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "Listings_Tags", id: false, force: :cascade do |t|
+    t.bigint "Listing_id", null: false
+    t.bigint "Tag_id", null: false
+  end
 
   create_table "images", force: :cascade do |t|
     t.bigint "listing_id"
@@ -93,6 +98,12 @@ ActiveRecord::Schema.define(version: 2021_01_05_125618) do
     t.integer "num_favorers"
     t.string "languages", default: [], array: true
     t.string "icon_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
