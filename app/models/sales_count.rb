@@ -1,0 +1,2 @@
+class SalesCount < ApplicationRecord
+end

@@ -10,10 +10,92 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_01_211805) do
+ActiveRecord::Schema.define(version: 2021_01_05_125618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "images", force: :cascade do |t|
+    t.bigint "listing_id"
+    t.integer "etsy_image_id"
+    t.string "url_full"
+    t.string "url_570_n"
+    t.string "url_75_75"
+    t.string "url_170_135"
+    t.string "hex_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["listing_id"], name: "index_images_on_listing_id"
+  end
+
+  create_table "listings", force: :cascade do |t|
+    t.integer "etsy_id", null: false
+    t.string "state", default: "active"
+    t.integer "etsy_user_id"
+    t.string "title", null: false
+    t.text "description"
+    t.decimal "price", precision: 8, scale: 2
+    t.string "unit"
+    t.integer "quantity"
+    t.integer "taxonomy_id"
+    t.integer "suggested_taxonomy_id"
+    t.string "materials", default: [], array: true
+    t.integer "shop_section_id"
+    t.integer "featured_rank"
+    t.float "state_tsz"
+    t.string "url"
+    t.integer "views"
+    t.integer "num_favorers"
+    t.integer "processing_min"
+    t.integer "processing_max"
+    t.string "who_made"
+    t.boolean "is_supply"
+    t.string "when_made"
+    t.integer "item_weight"
+    t.string "item_weight_unit"
+    t.integer "item_length"
+    t.integer "item_width"
+    t.integer "item_height"
+    t.string "item_dimensions_unit"
+    t.boolean "is_private", default: false
+    t.string "recipient"
+    t.string "occasion"
+    t.string "style", default: [], array: true
+    t.boolean "non_taxable"
+    t.boolean "is_customizable"
+    t.boolean "is_digital"
+    t.string "file_data"
+    t.boolean "has_variations"
+    t.string "language"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "shop_id"
+    t.index ["shop_id"], name: "index_listings_on_shop_id"
+  end
+
+  create_table "sales_counts", force: :cascade do |t|
+    t.bigint "listing_id", null: false
+    t.integer "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["listing_id"], name: "index_sales_counts_on_listing_id"
+  end
+
+  create_table "shops", force: :cascade do |t|
+    t.integer "etsy_id"
+    t.string "name"
+    t.float "creation_tsz"
+    t.string "title"
+    t.string "announcement"
+    t.string "currency_unit"
+    t.string "url"
+    t.string "image_url"
+    t.integer "num_favorers"
+    t.string "languages", default: [], array: true
+    t.string "icon_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +109,5 @@ ActiveRecord::Schema.define(version: 2021_01_01_211805) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "listings", "shops"
 end
