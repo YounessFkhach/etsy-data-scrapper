@@ -10,10 +10,10 @@ module Services
 
         tags_to_create = (@tags_hash - existing_tags.map(&:name)).map { |name| { name: name }}
 
-        create_tags = Tag.create!(tags_to_create)
+        created_tags = Tag.create!(tags_to_create)
 
         # return all the tags
-        existing_tags + tags_to_create
+        existing_tags + created_tags
       end
     end
   end

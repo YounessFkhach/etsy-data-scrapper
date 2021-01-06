@@ -10,15 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_05_135518) do
+ActiveRecord::Schema.define(version: 2021_01_06_161339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "Listings_Tags", id: false, force: :cascade do |t|
-    t.bigint "Listing_id", null: false
-    t.bigint "Tag_id", null: false
-  end
 
   create_table "images", force: :cascade do |t|
     t.bigint "listing_id"
@@ -31,6 +26,14 @@ ActiveRecord::Schema.define(version: 2021_01_05_135518) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["listing_id"], name: "index_images_on_listing_id"
+  end
+
+  create_table "listing_tags", force: :cascade do |t|
+    t.bigint "tag_id"
+    t.bigint "listing_id"
+    t.index ["listing_id", "tag_id"], name: "index_listing_tags_on_listing_id_and_tag_id"
+    t.index ["listing_id"], name: "index_listing_tags_on_listing_id"
+    t.index ["tag_id"], name: "index_listing_tags_on_tag_id"
   end
 
   create_table "listings", force: :cascade do |t|
@@ -75,6 +78,7 @@ ActiveRecord::Schema.define(version: 2021_01_05_135518) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "shop_id"
+    t.integer "creation_tsz"
     t.index ["shop_id"], name: "index_listings_on_shop_id"
   end
 
