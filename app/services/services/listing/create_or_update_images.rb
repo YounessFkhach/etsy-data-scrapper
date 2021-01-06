@@ -7,13 +7,22 @@ module Services
       end
 
       def call
-        Image.create!(remaped_images_data)
+        existing_images = Image.where(etsy_image_id: @images_hash.map { |image| image['listing_image_id'] })
+
+        created_images = Image.create!(remaped_images_data(existing_images))
+
+        # return the existing and the newely created
+        existing_images + created_images
       end
 
       private
 
-      def remaped_images_data
-        @images_hash.map do |image|
+      def remaped_images_data(existing_images = [])
+        existing_images_etsy_ids = existing_images.map(&:etsy_image_id)
+
+        @images_hash.reject do |image|
+          existing_images_etsy_ids.include?(image['listing_image_id'])
+        end.map do |image|
           {
             listing_id: @listing_id,
             etsy_image_id: image['listing_image_id'],

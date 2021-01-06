@@ -128,11 +128,27 @@ describe Services::Listing::CreateOrUpdateImages, type: :service do
     JSON.load(json)
   end
 
-  context 'when the array is not empty' do
+  context 'when the images do not already exist' do
     it 'creates the images' do
       expect do
         described_class.new(array, listing.id).call
       end.to change { Image.count }.by(array.size)
+    end
+  end
+
+  context 'when there is an already existing image' do
+    before do
+      create(:image, etsy_image_id: array.first['listing_image_id'])
+    end
+
+    it 'creates the new images only' do
+      expect do
+        described_class.new(array, listing.id).call
+      end.to change { Image.count }.by(array.size - 1)
+    end
+
+    it 'returns all the images' do
+      expect(described_class.new(array, listing.id).call.size).to eq array.size
     end
   end
 end
