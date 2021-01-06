@@ -13,4 +13,20 @@ describe Services::Shop::CreateOrUpdateShop, type: :service do
       end.to change { Shop.count }.by(1)
     end
   end
+
+  context 'when shop already exists' do
+    let!(:shop) { create(:shop, etsy_id: hash['shop_id']) }
+
+    it 'does not create a new the shop' do
+      expect do
+        described_class.new(hash).call
+      end.not_to change { Shop.count }
+    end
+
+    it 'updates and returns the shop' do
+      expect do
+        described_class.new(hash).call
+      end.to change { shop.reload.name }
+    end
+  end
 end
