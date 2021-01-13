@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_06_161339) do
+ActiveRecord::Schema.define(version: 2021_01_08_130620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "images", force: :cascade do |t|
     t.bigint "listing_id"
-    t.integer "etsy_image_id"
+    t.float "etsy_image_id"
     t.string "url_full"
     t.string "url_570_n"
     t.string "url_75_75"
@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(version: 2021_01_06_161339) do
     t.integer "etsy_id", null: false
     t.string "state", default: "active"
     t.integer "etsy_user_id"
-    t.string "title", null: false
+    t.string "title"
     t.text "description"
-    t.decimal "price", precision: 8, scale: 2
+    t.float "price"
     t.string "unit"
     t.integer "quantity"
     t.integer "taxonomy_id"

@@ -2,7 +2,7 @@ module Services
   module Listing
     class CreateOrUpdateImages
       def initialize(hashArray, listing_id)
-        @images_hash = hashArray
+        @images_hash = hashArray || []
         @listing_id = listing_id
       end
 

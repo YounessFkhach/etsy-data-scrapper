@@ -2,7 +2,7 @@ module Services
   module Listing
     class CreateOrUpdateTags
       def initialize(hashArray)
-        @tags_hash = hashArray
+        @tags_hash = hashArray || []
       end
 
       def call

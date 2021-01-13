@@ -1,7 +1,7 @@
 module Services
   class ConsumeListingFromJson
-    def initialize(json)
-      @hash = json.to_h
+    def initialize(hash)
+      @hash = hash
     end
 
     def call
