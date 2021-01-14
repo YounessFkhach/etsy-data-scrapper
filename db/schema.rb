@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_08_130620) do
+ActiveRecord::Schema.define(version: 2021_01_14_202612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 2021_01_08_130620) do
     t.string "materials", default: [], array: true
     t.integer "shop_section_id"
     t.integer "featured_rank"
-    t.float "state_tsz"
     t.string "url"
     t.integer "views"
     t.integer "num_favorers"
@@ -78,7 +77,8 @@ ActiveRecord::Schema.define(version: 2021_01_08_130620) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "shop_id"
-    t.integer "creation_tsz"
+    t.datetime "creation_datetime"
+    t.datetime "state_datetime"
     t.index ["shop_id"], name: "index_listings_on_shop_id"
   end
 
@@ -93,7 +93,6 @@ ActiveRecord::Schema.define(version: 2021_01_08_130620) do
   create_table "shops", force: :cascade do |t|
     t.integer "etsy_id"
     t.string "name"
-    t.float "creation_tsz"
     t.string "title"
     t.string "announcement"
     t.string "currency_unit"
@@ -104,6 +103,7 @@ ActiveRecord::Schema.define(version: 2021_01_08_130620) do
     t.string "icon_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "creation_datetime"
   end
 
   create_table "tags", force: :cascade do |t|

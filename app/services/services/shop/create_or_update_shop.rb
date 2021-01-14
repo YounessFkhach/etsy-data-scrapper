@@ -47,10 +47,11 @@ module Services
         @hash.delete 'is_opted_in_to_buyer_promise'
         @hash.delete 'is_shop_us_based'
         @hash.delete 'custom_shops_state'
-        @hash['name']          = @hash.delete 'shop_name'
-        @hash['currency_unit'] = @hash.delete 'currency_code'
-        @hash['image_url']     = @hash.delete 'image_url_760x100'
-        @hash['icon_url']      = @hash.delete 'icon_url_fullxfull'
+        @hash['name']              = @hash.delete 'shop_name'
+        @hash['currency_unit']     = @hash.delete 'currency_code'
+        @hash['image_url']         = @hash.delete 'image_url_760x100'
+        @hash['icon_url']          = @hash.delete 'icon_url_fullxfull'
+        @hash['creation_datetime'] = @hash.delete 'creation_tsz'
 
         @hash
       end
