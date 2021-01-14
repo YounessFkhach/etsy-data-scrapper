@@ -6,7 +6,7 @@ namespace :listings do
 
     count = fetch_count
     limit = 100
-    pages_count = (count / limit) + 1
+    pages_count = (count / limit)
 
     puts "Fetching and Processing to process ##{count} listings"
 

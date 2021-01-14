@@ -6,14 +6,19 @@ module Services
 
       def initialize(page)
         @page = page
+        @retries = 0
       end
 
       def call
         json = self.class.get("/listings/active", query: options, timeout: 300).body
 
         JSON.parse(json)
-      rescue
-        call
+      rescue => e
+        @retries += 1
+        puts "error on page ##{@page}"
+        puts e
+
+        call if @retries < 10
       end
 
       private

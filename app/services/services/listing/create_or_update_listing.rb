@@ -36,6 +36,7 @@ module Services
           materials: @hash['materials'],
           shop_section_id: @hash['shop_section_id'],
           featured_rank: @hash['featured_rank'],
+          creation_tsz: @hash['creation_tsz'],
           state_tsz: @hash['state_tsz'],
           url: @hash['url'],
           views: @hash['views'],
