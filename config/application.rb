@@ -10,6 +10,7 @@ module EtsyData
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.hosts << ENV['HOST']
 
     config.autoload_paths += %W(#{config.root}/lib #{config.root}/app)
 
