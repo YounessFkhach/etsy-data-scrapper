@@ -26,7 +26,7 @@ ActiveAdmin.register Listing do
   index do
     id_column
     column 'Image' do |listing|
-      image_tag listing.images.first&.url_75_75
+      image_tag listing.images.first.url_75_75 if listing.images.first
     end
     column :title
     column :views
