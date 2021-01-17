@@ -10,7 +10,7 @@ namespace :listings do
 
     puts "Fetching and Processing to process ##{count} listings"
 
-    Parallel.map((1..pages_count).to_a.shuffle, in_processes: 4) do |page|
+    Parallel.map(1..pages_count, in_processes: 4) do |page|
       results = fetch_new_batch(page)
       process_batch(results, page)
     end
