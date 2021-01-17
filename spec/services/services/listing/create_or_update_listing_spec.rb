@@ -10,6 +10,7 @@ describe Services::Listing::CreateOrUpdateListing, type: :service do
     it 'creates the Listing' do
       expect do
         described_class.new(hash, shop.id).call
+        puts Listing.last.creation_datetime
       end.to change { Listing.count }.by(1)
     end
   end

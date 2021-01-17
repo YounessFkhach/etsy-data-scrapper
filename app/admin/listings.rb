@@ -19,11 +19,14 @@ ActiveAdmin.register Listing do
   scope :all
 
   filter :title
-  filter :etsy_id
+  filter :content
   filter :creation_datetime
 
   index do
     id_column
+    column 'Image' do |listing|
+      image_tag listing.images.first.url_75_75
+    end
     column :title
     column :views
     column 'Url' do |listing|
