@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_14_202612) do
+ActiveRecord::Schema.define(version: 2021_01_17_211100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
 
   create_table "images", force: :cascade do |t|
     t.bigint "listing_id"
@@ -79,7 +105,10 @@ ActiveRecord::Schema.define(version: 2021_01_14_202612) do
     t.bigint "shop_id"
     t.datetime "creation_datetime"
     t.datetime "state_datetime"
+    t.index ["creation_datetime"], name: "index_listings_on_creation_datetime"
     t.index ["shop_id"], name: "index_listings_on_shop_id"
+    t.index ["state"], name: "index_listings_on_state"
+    t.index ["views"], name: "index_listings_on_views"
   end
 
   create_table "sales_counts", force: :cascade do |t|

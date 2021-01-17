@@ -28,6 +28,9 @@ gem 'devise'
 # Env variables
 gem 'dotenv-rails', groups: [:development, :test]
 
+# Main dashboard
+gem 'activeadmin'
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
