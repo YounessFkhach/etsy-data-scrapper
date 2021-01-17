@@ -18,11 +18,17 @@ ActiveAdmin.register Listing do
   scope :active, default: true
   scope :all
 
+  filter :title
+  filter :etsy_id
+  filter :creation_datetime
+
   index do
     id_column
     column :title
     column :views
+    column 'Url' do |listing|
+      link_to 'Open in etsy', listing.url, target: '_blank'
+    end
     column :creation_datetime
-    link_to :url
   end
 end
