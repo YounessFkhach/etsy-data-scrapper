@@ -51,9 +51,13 @@ module Services
         @hash['currency_unit']     = @hash.delete 'currency_code'
         @hash['image_url']         = @hash.delete 'image_url_760x100'
         @hash['icon_url']          = @hash.delete 'icon_url_fullxfull'
-        @hash['creation_datetime'] = @hash.delete 'creation_tsz'
+        @hash['creation_datetime'] = unix_epoch_to_timestamp(@hash.delete 'creation_tsz')
 
         @hash
+      end
+
+      def unix_epoch_to_timestamp(epoch)
+        DateTime.strptime(epoch.to_s, '%s') unless epoch.nil?
       end
     end
   end

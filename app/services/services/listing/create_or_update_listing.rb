@@ -36,8 +36,8 @@ module Services
           materials: @hash['materials'],
           shop_section_id: @hash['shop_section_id'],
           featured_rank: @hash['featured_rank'],
-          creation_datetime: @hash['creation_tsz'],
-          state_datetime: @hash['state_tsz'],
+          creation_datetime: unix_epoch_to_timestamp(@hash['creation_tsz']),
+          state_datetime: unix_epoch_to_timestamp(@hash['state_tsz']),
           url: @hash['url'],
           views: @hash['views'],
           num_favorers: @hash['num_favorers'],
@@ -63,6 +63,10 @@ module Services
           has_variations: @hash['has_variations'],
           language: @hash['language']
         }
+      end
+
+      def unix_epoch_to_timestamp(epoch)
+        DateTime.strptime(epoch.to_s, '%s') unless epoch.nil?
       end
     end
   end
