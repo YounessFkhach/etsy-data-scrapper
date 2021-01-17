@@ -3,6 +3,7 @@ class Listing < ApplicationRecord
   has_many :images
   has_many :listing_tags
   has_many :tags, through: :listing_tags
+  has_many :views_counts
 
   scope :active, -> { where(state: 'active') }
 end

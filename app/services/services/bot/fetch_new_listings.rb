@@ -18,7 +18,10 @@ module Services
         puts "error on page ##{@page}"
         puts e
 
-        call if @retries < 10
+        if @retries < 5
+          sleep 2
+          call
+        end
       end
 
       private

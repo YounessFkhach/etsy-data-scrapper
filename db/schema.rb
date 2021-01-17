@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_17_211100) do
+ActiveRecord::Schema.define(version: 2021_01_17_233333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,14 @@ ActiveRecord::Schema.define(version: 2021_01_17_211100) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "views_counts", force: :cascade do |t|
+    t.integer "count"
+    t.bigint "listing_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["listing_id"], name: "index_views_counts_on_listing_id"
   end
 
   add_foreign_key "listings", "shops"

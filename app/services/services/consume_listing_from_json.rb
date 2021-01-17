@@ -9,6 +9,7 @@ module Services
       create_or_update_listing
       create_or_update_images
       create_or_update_tags
+      create_views_count
 
       @listing.images = @images
       @listing.tags = @tags
@@ -33,6 +34,10 @@ module Services
 
     def create_or_update_listing
       @listing = Services::Listing::CreateOrUpdateListing.new(@hash, @shop.id).call
+    end
+
+    def create_views_count
+      ViewsCount.create!(listing_id: @listing.id, count: @hash['views'])
     end
   end
 end
