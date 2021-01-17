@@ -20,12 +20,13 @@ ActiveAdmin.register Listing do
 
   filter :title
   filter :content
+  filter :views, as: :numeric
   filter :creation_datetime
 
   index do
     id_column
     column 'Image' do |listing|
-      image_tag listing.images.first.url_75_75
+      image_tag listing.images.first&.url_75_75
     end
     column :title
     column :views
