@@ -8,7 +8,7 @@ module Services
       def call
         html = HTTParty.get(@listing.url, timeout: 300).body
 
-        sales_count = html.match(/(\d*\.?\d+|\d{1,3}(,\d{3})*(\.\d+)?) sales/) { |m| m.captures }&.first&.to_i
+        sales_count = html.match(/(\d*\.?\d+|\d{1,3}(,\d{3})*(\.\d+)?) sales/) { |m| m.captures }&.first&.delete(',')&.to_i
 
         if sales_count
           SalesCount.create!(count: sales_count, listing_id: @listing.id)
