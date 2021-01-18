@@ -16,6 +16,8 @@ ActiveAdmin.register Listing do
       image_tag listing.images.first.url_75_75 if listing.images.first
     end
     column :title
+    column :sales_count, label: 'Sales'
+
     column 'Views chart' do |listing|
       render 'views_chart', listing: listing
     end
