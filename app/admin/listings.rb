@@ -16,6 +16,9 @@ ActiveAdmin.register Listing do
       image_tag listing.images.first.url_75_75 if listing.images.first
     end
     column :title
+    column 'Views chart' do |listing|
+      render 'views_chart', listing: listing
+    end
     column :views
     column 'Price' do |listing|
       "#{listing.price} #{listing.unit}"

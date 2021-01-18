@@ -1,0 +1,13 @@
+<div>
+  <%= line_chart listing.views_counts.last(4).map { |vc| [vc.created_at, vc.count]}.to_h,
+    adapter: 'google',
+    curve: false,
+    legend: false,
+    width: '200px',
+    height: '100px',
+    library: {
+      hAxis: { textPosition: 'none' },
+      vAxis: { textPosition: 'none', logScale: true },
+    }
+  %>
+</div>

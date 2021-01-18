@@ -31,6 +31,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 # Main dashboard
 gem 'activeadmin'
 
+gem "chartkick"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
