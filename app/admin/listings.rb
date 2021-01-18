@@ -17,6 +17,9 @@ ActiveAdmin.register Listing do
     end
     column :title
     column :views
+    column 'Price' do |listing|
+      "#{listing.price} #{listing.unit}"
+    end
     column 'Url' do |listing|
       link_to 'Open in etsy', listing.url, target: '_blank'
     end
